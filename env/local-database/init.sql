@@ -1,0 +1,1 @@
+CREATE DATABASE public ENCODING 'UTF8' LC_COLLATE 'C' TEMPLATE 'template0' OWNER 'publicadmin';

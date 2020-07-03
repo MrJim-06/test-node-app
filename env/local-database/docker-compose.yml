@@ -1,0 +1,14 @@
+version: '3.7'
+
+services: 
+  database:
+    image: postgres:9.6-alpine
+    container_name: postgres-database
+    restart: always
+    environment: 
+      - POSTGRES_USER=publicadmin
+      - POSTGRES_PASSWORD=publicadmin
+    ports: 
+      - 5432:5432
+    volumes: 
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

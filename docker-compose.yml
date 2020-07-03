@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:9.6-alpine
+    container_name: node-app-db
+    ports:
+      - 9229:5432
+    environment:
+      POSTGRES_USER: ${DB_USER:-publicadmin}
+      POSTGRES_PASSWORD: ${DB_password:-publicadmin}
+    volumes: 
+      - ./env/local-database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  web:
+    build: .
+    container_name: node-app
+    command: npm run prod
+    volumes:
+      - .:/usr/src/app/
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
